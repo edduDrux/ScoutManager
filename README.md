@@ -25,9 +25,3 @@ O **ScoutCalendar** é uma aplicação web desenvolvida para auxiliar grupos esc
 - **Node.js** - Ambiente de execução para o servidor.
 - **Express** - Framework para criação da API.
 - **Firebase** - Banco de dados NoSQL para armazenamento de eventos e usuários.
-
-### Futuro
-- **Ionic/Capacitor** - Para conversão da aplicação web em um aplicativo móvel.
-- **Firebase Cloud Messaging (FCM)** - Para envio de notificações push.
-
----
