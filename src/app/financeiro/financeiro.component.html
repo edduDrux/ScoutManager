@@ -1,0 +1,30 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Financeiro</h2>
+  <mat-card class="mb-4">
+    <mat-card-title>Saldo Atual</mat-card-title>
+    <mat-card-content>
+      <p class="text-3xl font-bold">{{ currentBalance | currency:'BRL' }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Contas a Pagar/Receber</mat-card-title>
+    <mat-card-content>
+      <mat-table [dataSource]="accounts">
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.description }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.amount | currency:'BRL' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.status }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="['description', 'amount', 'status']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['description', 'amount', 'status']"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>
