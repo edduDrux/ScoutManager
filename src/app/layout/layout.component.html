@@ -1,0 +1,61 @@
+<div class="flex min-h-screen">
+  <aside class="w-64 bg-gray-800 text-white p-4 fixed h-full">
+    <nav>
+      <ul class="space-y-2">
+        <li>
+          <a
+            [routerLink]="['/home']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/loja']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Loja</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/financeiro']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Financeiro</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/almoxarifado']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Almoxarifado</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/pessoas']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Pessoas/Escoteiros</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/configuracoes']"
+            class="block p-2 hover:bg-gray-700 rounded"
+            >Configurações</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="mt-4">
+      <button
+        (click)="logout()"
+        class="w-full p-2 bg-red-600 hover:bg-red-700 text-white rounded"
+      >
+        Sair
+      </button>
+    </div>
+  </aside>
+  <main class="flex-1 p-4 ml-64">
+    <router-outlet></router-outlet>
+  </main>
+</div>
