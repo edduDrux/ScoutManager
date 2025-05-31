@@ -1,9 +1,0 @@
-mat-sidenav-container {
-  @apply h-screen;
-}
-mat-sidenav {
-  @apply bg-gray-800 text-white w-64;
-}
-mat-nav-list a {
-  @apply flex items-center p-4 hover:bg-gray-700;
-}

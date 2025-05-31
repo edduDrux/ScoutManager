@@ -1,0 +1,70 @@
+<mat-sidenav-container class="h-screen">
+  <mat-sidenav
+    #drawer
+    mode="side"
+    [opened]="!(isHandset$ | async)"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    class="w-64 border-r"
+  >
+    <mat-toolbar class="bg-primary text-white">
+      <span>ScoutCalendar</span>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        routerLinkActive="bg-gray-200"
+        [routerLinkActiveOptions]="{
+          exact:
+            item.route === '/home' || item.route === '/configuracoes'
+              ? false
+              : true
+        }"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.name }}</span>
+      </a>
+    </mat-nav-list>
+    <div class="p-4 mt-auto text-center">
+      <p class="text-sm" *ngIf="currentUser">
+        Logado como: {{ currentUser.nomeCompleto || currentUser.email }}
+      </p>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="logout()"
+        class="w-full mt-2"
+      >
+        <mat-icon>logout</mat-icon>
+        Sair
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="flex flex-col">
+    <mat-toolbar color="primary" class="sticky top-0 z-10 shadow-md">
+      <button
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{ pageTitle }}</span>
+      <span class="flex-auto"></span>
+      <div *ngIf="currentUser" class="text-sm mr-4">
+        Olá, {{ currentUser.nomeCompleto.split(" ")[0] || "Usuário" }}
+      </div>
+    </mat-toolbar>
+
+    <main class="flex-grow p-2 sm:p-4 lg:p-6 overflow-auto">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="bg-gray-100 text-center p-2 text-sm text-gray-600 border-t">
+      ScoutCalendar &copy;
+      {{ (now | async) ? (now | async | date : "yyyy") : currentYear }}
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

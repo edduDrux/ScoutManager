@@ -1,0 +1,94 @@
+<div class="container mx-auto p-4">
+  <mat-card>
+    <mat-card-title class="mb-6">{{ pageTitle }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-full mb-4">
+          <mat-label>Código do Usuário</mat-label>
+          <input matInput formControlName="codigoUsuario" required />
+          <mat-error
+            *ngIf="usuarioForm.get('codigoUsuario')?.hasError('required')"
+          >
+            Código é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full mb-4">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput formControlName="nomeCompleto" required />
+          <mat-error
+            *ngIf="usuarioForm.get('nomeCompleto')?.hasError('required')"
+          >
+            Nome completo é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full mb-4">
+          <mat-label>Email (para login no Firebase)</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            required
+            [readonly]="isEditMode"
+          />
+          <mat-error *ngIf="usuarioForm.get('email')?.hasError('required')">
+            Email é obrigatório.
+          </mat-error>
+          <mat-error *ngIf="usuarioForm.get('email')?.hasError('email')">
+            Formato de email inválido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full mb-6">
+          <mat-label>Senha de Acesso</mat-label>
+          <input
+            matInput
+            formControlName="senha"
+            type="password"
+            [required]="!isEditMode"
+          />
+          <mat-hint *ngIf="isEditMode && !usuarioForm.get('senha')?.value"
+            >Deixe em branco para não alterar a senha.</mat-hint
+          >
+          <mat-error
+            *ngIf="
+              usuarioForm.get('senha')?.hasError('required') && !isEditMode
+            "
+          >
+            Senha é obrigatória.
+          </mat-error>
+          <mat-error *ngIf="usuarioForm.get('senha')?.hasError('minlength')">
+            Senha deve ter no mínimo 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="flex justify-end space-x-3">
+          <button
+            mat-stroked-button
+            type="button"
+            routerLink="/configuracoes/usuarios"
+            [disabled]="isLoading"
+          >
+            Cancelar
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="isLoading || usuarioForm.invalid"
+          >
+            <span *ngIf="!isLoading">{{
+              isEditMode ? "Salvar Alterações" : "Cadastrar Usuário"
+            }}</span>
+            <mat-spinner
+              *ngIf="isLoading"
+              diameter="24"
+              class="inline-block"
+            ></mat-spinner>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,27 @@
+<div
+  class="home-background w-full h-full bg-cover bg-center flex items-center justify-center"
+  [style.background-image]="
+    groupPhotoUrl ? 'url(' + groupPhotoUrl + ')' : 'none'
+  "
+  [ngClass]="{ 'bg-gray-300': !groupPhotoUrl }"
+>
+  <mat-card
+    *ngIf="!groupPhotoUrl"
+    class="p-6 bg-white bg-opacity-80 rounded-lg"
+  >
+    <mat-card-title class="text-center text-2xl"
+      >Bem-vindo ao ScoutCalendar!</mat-card-title
+    >
+    <mat-card-content class="text-center mt-2">
+      <p>Configure a foto do grupo em Configurações.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div
+    *ngIf="groupPhotoUrl"
+    class="text-center p-4 bg-black bg-opacity-50 rounded-md"
+  >
+    <h1 class="text-3xl font-bold text-white">Bem-vindo ao ScoutCalendar</h1>
+    <p class="text-xl text-gray-200">{{ groupName }}</p>
+  </div>
+</div>

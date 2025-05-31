@@ -1,0 +1,45 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <mat-card class="w-full max-w-md p-8">
+    <mat-card-title class="text-center text-2xl font-semibold mb-6"
+      >ScoutCalendar Login</mat-card-title
+    >
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="w-full mb-4">
+          <mat-label>Email (ou Código ADM-SIS)</mat-label>
+          <input matInput formControlName="email" type="text" required />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            Email é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full mb-6">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" type="password" required />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Senha é obrigatória.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="w-full"
+          [disabled]="isLoading || loginForm.invalid"
+        >
+          <span *ngIf="!isLoading">Entrar</span>
+          <mat-spinner
+            *ngIf="isLoading"
+            diameter="24"
+            class="inline-block"
+          ></mat-spinner>
+        </button>
+
+        <div *ngIf="loginError" class="text-red-500 text-sm mt-4 text-center">
+          {{ loginError }}
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
